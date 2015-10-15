@@ -2,6 +2,30 @@
 <html>
 <head>
 	<title>Image upload shrinking?</title>
+	<style>
+	html, body {
+		margin: 0;
+		font-size: 16px;
+		font-family: sans-serif;
+	}
+	img, canvas {
+		display: block;
+		margin: 1em auto;
+		max-width: 100%;
+		border: 1px solid black;
+	}
+	.yup, form {
+		display: block;
+		border: 1px solid black;
+		padding: 2em;
+	}
+	input {
+		display: block;
+		width: 30%;
+		padding: 0.5em 15px;
+		margin: 1em auto;
+	}
+	</style>
 </head>
 <body>
 	<form id="form" encType="multipart/form-data">

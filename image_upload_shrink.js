@@ -1,14 +1,17 @@
 var formElement = document.getElementById('form'),
 	fileElement = document.getElementById('file'),
 	imageShrinker = function(originalImageData){
-		var originalImage = document.createElement('img'),
+		var holder = document.createElement('div'),
+			originalImage = document.createElement('img'),
 			generatedImage = document.createElement('img'),
 			imageScaleCanvas = document.createElement('canvas'),
 			context = imageScaleCanvas.getContext('2d'),
 			rawScaledImageData;
-		document.body.appendChild(originalImage);
-		document.body.appendChild(imageScaleCanvas);
-		document.body.appendChild(generatedImage);
+		holder.className = 'yup';
+		document.body.appendChild(holder);
+		holder.appendChild(originalImage);
+		holder.appendChild(imageScaleCanvas);
+		holder.appendChild(generatedImage);
 		originalImage.src = originalImageData;
 		imageScaleCanvas.width = 200;
 		imageScaleCanvas.height = 100;
