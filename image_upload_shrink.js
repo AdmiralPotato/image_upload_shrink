@@ -2,6 +2,7 @@ var formElement = document.getElementById('form'),
 	fileElement = document.getElementById('file'),
 	imageShrinker = function(originalImageData){
 		var holder = document.createElement('div'),
+			closeBox = document.createElement('a'),
 			originalImage = document.createElement('img'),
 			generatedImage = document.createElement('img'),
 			imageScaleCanvas = document.createElement('canvas'),
@@ -9,9 +10,13 @@ var formElement = document.getElementById('form'),
 			rawScaledImageData;
 		holder.className = 'yup';
 		document.body.appendChild(holder);
+		holder.appendChild(closeBox);
 		holder.appendChild(originalImage);
 		holder.appendChild(imageScaleCanvas);
 		holder.appendChild(generatedImage);
+		closeBox.addEventListener('click', function(){
+			document.body.removeChild(holder);
+		});
 		originalImage.src = originalImageData;
 		imageScaleCanvas.width = 200;
 		imageScaleCanvas.height = 100;
