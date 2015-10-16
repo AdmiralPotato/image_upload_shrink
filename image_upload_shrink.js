@@ -11,8 +11,17 @@ var formElement = document.getElementById('form'),
 			originalImage = document.createElement('img'),
 			generatedImage = document.createElement('img'),
 			imageScaleCanvas = document.createElement('canvas'),
-			context = imageScaleCanvas.getContext('2d'),
-			rawScaledImageData;
+			context = imageScaleCanvas.getContext('2d');
+
+		//ref: https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-imagesmoothingenabled
+		context.webkitImageSmoothingEnabled = true;
+		context.mozImageSmoothingEnabled = true;
+		context.imageSmoothingEnabled = true;
+		//ref: https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-imagesmoothingquality
+		context.webkitImageSmoothingQuality = 'high';
+		context.mozImageSmoothingQuality = 'high';
+		context.imageSmoothingQuality = 'high';
+
 		holder.className = 'yup';
 		document.body.appendChild(holder);
 		holder.appendChild(closeBox);
@@ -26,8 +35,8 @@ var formElement = document.getElementById('form'),
 			var proportionalImageSize = calculateAspectRatioFit(
 				originalImage.width,
 				originalImage.height,
-				200,
-				200
+				256,
+				256
 			);
 			imageScaleCanvas.width = proportionalImageSize.width;
 			imageScaleCanvas.height = proportionalImageSize.height;
@@ -37,12 +46,10 @@ var formElement = document.getElementById('form'),
 		originalImage.src = originalImageData;
 	},
 	changeHandler = function(event){
-		console.log(event);
 		var reader = new FileReader();
 		var userSelectedFile = event.target.files[0];
 
 		reader.onloadend = function(upload) {
-			console.log(upload.target.result);
 			imageShrinker(upload.target.result);
 		};
 		reader.readAsDataURL(userSelectedFile);
