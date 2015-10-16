@@ -17,18 +17,20 @@ var formElement = document.getElementById('form'),
 		closeBox.addEventListener('click', function(){
 			document.body.removeChild(holder);
 		});
-		originalImage.src = originalImageData;
 		imageScaleCanvas.width = 200;
 		imageScaleCanvas.height = 100;
-		context.drawImage(originalImage, 0, 0, imageScaleCanvas.width, imageScaleCanvas.height);
-		generatedImage.src = imageScaleCanvas.toDataURL();
+		originalImage.onload = function() {
+			context.drawImage(originalImage, 0, 0, imageScaleCanvas.width, imageScaleCanvas.height);
+			generatedImage.src = imageScaleCanvas.toDataURL();
+		};
+		originalImage.src = originalImageData;
 	},
 	changeHandler = function(event){
 		console.log(event);
 		var reader = new FileReader();
 		var userSelectedFile = event.target.files[0];
 
-		reader.onload = function(upload) {
+		reader.onloadend = function(upload) {
 			console.log(upload.target.result);
 			imageShrinker(upload.target.result);
 		};
